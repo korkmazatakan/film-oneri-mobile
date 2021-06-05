@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import colors from '../../../config/colors';
 
-const API_URL = 'https://moviesuggestionwebapi.azurewebsites.net/';
+const API_URL = 'https://filmoneriapi.otokon.tech/';
 
 const SmallMovieCard = ({movie, genre, navigation}) => {
   return (
@@ -20,7 +20,11 @@ const SmallMovieCard = ({movie, genre, navigation}) => {
           />
         </View>
         <View style={{paddingTop: 5}}>
-          <Text style={styles.movieName}>{movie.name}</Text>
+          <Text style={styles.movieName}>
+            {movie.name.length > 20
+              ? movie.name.substring(0, 17) + '..'
+              : movie.name}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>

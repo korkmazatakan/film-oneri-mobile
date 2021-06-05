@@ -2,8 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import colors from '../../../config/colors';
 
-const API_URL = 'https://moviesuggestionwebapi.azurewebsites.net/';
-
+const API_URL = 'https://filmoneriapi.otokon.tech/';
 const ExtendMovieCard = ({genre, movie, navigation}) => {
   return (
     <TouchableOpacity
@@ -27,21 +26,27 @@ const ExtendMovieCard = ({genre, movie, navigation}) => {
         </View>
         <View
           style={{
-            flex: 20,
+            marginBottom: 10,
+            flex: 55,
             marginLeft: 205,
             flexDirection: 'column',
           }}>
           <View>
-            <Text style={styles.movieName}>{movie.name}</Text>
+            <Text style={styles.movieName}>
+              {movie.name.length > 12
+                ? movie.name.substring(0, 10) + '...'
+                : movie.name}
+              {}
+            </Text>
           </View>
-          <View style={{flex: 1}}>
+          <View style={{flex: 1, paddingBottom: 5}}>
             <Text style={styles.gnd}>
               {genre} | {movie.releaseDate.substring(0, 4)}
             </Text>
           </View>
-          <View style={{flex: 5}}>
+          <View style={{flex: 10}}>
             <Text style={styles.description}>
-              {`${movie.description.substring(0, 210)}...`}
+              {`${movie.description.substring(0, 160)}...`}
             </Text>
           </View>
         </View>
@@ -59,18 +64,19 @@ const styles = StyleSheet.create({
   },
   movieName: {
     fontFamily: 'Roboto-Light',
-    fontSize: 25,
+    fontSize: 23,
     color: colors.detailSceenText,
     textAlign: 'left',
-    paddingBottom: 2,
+    paddingBottom: 5,
   },
   gnd: {
     fontFamily: 'Roboto-Light',
-    fontSize: 17,
+    fontSize: 19,
     color: colors.white,
     textAlign: 'left',
   },
   description: {
+    marginTop: 15,
     fontFamily: 'Roboto-Regular',
     fontSize: 15,
     fontWeight: '200',

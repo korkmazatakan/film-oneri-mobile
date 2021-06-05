@@ -3,7 +3,7 @@ import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import colors from '../../../config/colors';
 import {Avatar} from 'react-native-paper';
 
-const API_URL = 'https://moviesuggestionwebapi.azurewebsites.net/';
+const API_URL = 'https://filmoneriapi.otokon.tech/';
 
 const Directorcard = ({director, navigation}) => {
   return (

@@ -12,7 +12,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import CollapsibleToolbar from 'react-native-collapsible-toolbar';
 import colors from '../config/colors';
 
-const API_URL = 'https://moviesuggestionwebapi.azurewebsites.net/';
+const API_URL = 'https://filmoneriapi.otokon.tech/';
 
 const Detailscreenfordirector = ({route, navigation}) => {
   /* get params */

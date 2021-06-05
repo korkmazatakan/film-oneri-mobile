@@ -14,7 +14,7 @@ import {
 import colors from '../config/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const API_URL = 'https://moviesuggestionwebapi.azurewebsites.net/';
+const API_URL = 'https://filmoneriapi.otokon.tech/';
 
 const Moviesscreen = props => {
   const [isLoading, setLoading] = useState(true);

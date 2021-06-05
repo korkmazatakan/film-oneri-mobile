@@ -18,7 +18,7 @@ import OneSignal from 'react-native-onesignal';
 
 const Drawer = createDrawerNavigator();
 
-const API_URL = 'https://moviesuggestionwebapi.azurewebsites.net/';
+const API_URL = 'https://filmoneriapi.otokon.tech/';
 
 const App = () => {
   const [genres, setGenres] = useState([]);

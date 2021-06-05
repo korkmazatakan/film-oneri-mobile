@@ -6,7 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import CollapsibleToolbar from 'react-native-collapsible-toolbar';
 import colors from '../config/colors';
 
-const API_URL = 'https://moviesuggestionwebapi.azurewebsites.net/';
+const API_URL = 'https://filmoneriapi.otokon.tech/';
 
 const Detailscreen = ({route, navigation}) => {
   /* get params */
@@ -21,6 +21,7 @@ const Detailscreen = ({route, navigation}) => {
             alignContent: 'center',
             flexDirection: 'column',
             alignItems: 'center',
+            minHeight: 800,
           }}>
           <View style={{flexDirection: 'column', paddingHorizontal: 2}}>
             <View style={{flexDirection: 'row', marginHorizontal: 2}}>

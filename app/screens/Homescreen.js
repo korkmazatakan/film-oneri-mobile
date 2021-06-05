@@ -14,7 +14,7 @@ import SafeAreaView from 'react-native-safe-area-view';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import SplashScreen from 'react-native-splash-screen';
 
-const API_URL = 'https://moviesuggestionwebapi.azurewebsites.net/';
+const API_URL = 'https://filmoneriapi.otokon.tech/';
 
 const Homescreen = ({navigation}) => {
   const [isLoading1, setLoading1] = useState(true);
