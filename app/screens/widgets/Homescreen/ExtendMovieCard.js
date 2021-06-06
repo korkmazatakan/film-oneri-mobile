@@ -3,11 +3,11 @@ import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import colors from '../../../config/colors';
 
 const API_URL = 'https://filmoneriapi.otokon.tech/';
-const ExtendMovieCard = ({genre, movie, navigation}) => {
+const ExtendMovieCard = ({genre, movie,language, navigation}) => {
   return (
     <TouchableOpacity
       onPress={() =>
-        navigation.navigate('Detailscreen', {movie: movie, genre: genre})
+        navigation.navigate('Detailscreen', {movie: movie, genre: genre, language:language})
       }>
       <View
         style={{

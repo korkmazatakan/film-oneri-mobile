@@ -22,6 +22,14 @@ const Homescreen = ({navigation}) => {
   const [topMovies, setTopMovies] = useState([]);
   const [lastMovies, setLastMovies] = useState([]);
   const [genres, setGenres] = useState([]);
+  const [languages, setLanguages] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API_URL}api/Languages/getall`)
+      .then(response => response.json())
+      .then(json => setLanguages(json))
+      .catch(error => console.log(error));
+  }, []);
 
   useEffect(() => {
     fetch(`${API_URL}api/Genres/getall`)
@@ -83,7 +91,14 @@ const Homescreen = ({navigation}) => {
                 <ActivityIndicator />
               ) : (
                 lastMovies.map(mv => {
-                  let genreName;
+                  let genreName , languageName;
+
+                  languages.map(language => {
+                    if(language.id === mv.languageId ){
+                      languageName = language.name;
+                    }
+                  })
+
                   genres.map(genre => {
                     if (genre.id === mv.genreId) {
                       genreName = genre.genreName;
@@ -94,6 +109,7 @@ const Homescreen = ({navigation}) => {
                       key={mv.id}
                       movie={mv}
                       genre={genreName}
+                      language={languageName}
                       navigation={navigation}
                     />
                   );
@@ -116,7 +132,13 @@ const Homescreen = ({navigation}) => {
                 <ActivityIndicator />
               ) : (
                 topMovies.map(mv => {
-                  let genreName;
+                  let genreName, languageName;
+
+                  languages.map(language => {
+                    if(language.id === mv.languageId ){
+                      languageName = language.name;
+                    }
+                  })
                   genres.map(genre => {
                     if (mv.genreId === genre.id) {
                       genreName = genre.genreName;
@@ -126,6 +148,7 @@ const Homescreen = ({navigation}) => {
                     <ExtendMovieCard
                       key={mv.id}
                       genre={genreName}
+                      language={languageName}
                       movie={mv}
                       navigation={navigation}
                     />

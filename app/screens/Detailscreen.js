@@ -10,7 +10,7 @@ const API_URL = 'https://filmoneriapi.otokon.tech/';
 
 const Detailscreen = ({route, navigation}) => {
   /* get params */
-  const {genre, movie} = route.params;
+  const {genre,language, movie} = route.params;
 
   function renderContent() {
     return (
@@ -64,7 +64,7 @@ const Detailscreen = ({route, navigation}) => {
                     color: colors.detailScreenTitles,
                     fontSize: 22,
                   }}>
-                  {movie.releaseDate.substring(0, 4)}
+                  {language}
                 </Text>
               </View>
             </View>
