@@ -4,11 +4,16 @@ import colors from '../../../config/colors';
 
 const API_URL = 'https://filmoneriapi.otokon.tech/';
 
-const SmallMovieCard = ({movie, genre,language, navigation}) => {
+const SmallMovieCard = ({movie, genre, language, director, navigation}) => {
   return (
     <TouchableOpacity
       onPress={() =>
-        navigation.navigate('Detailscreen', {movie: movie, genre: genre,language:language})
+        navigation.navigate('Detailscreen', {
+          movie: movie,
+          genre: genre,
+          language: language,
+          director: director,
+        })
       }>
       <View style={styles.container}>
         <View style={{flex: 2}}>

@@ -19,10 +19,11 @@ const API_URL = 'https://filmoneriapi.otokon.tech/';
 const Homescreen = ({navigation}) => {
   const [isLoading1, setLoading1] = useState(true);
   const [isLoading2, setLoading2] = useState(true);
-  const [topMovies, setTopMovies] = useState([]);
+  const [randomMovies, setRandomMovies] = useState([]);
   const [lastMovies, setLastMovies] = useState([]);
   const [genres, setGenres] = useState([]);
   const [languages, setLanguages] = useState([]);
+  const [directors, setDirectors] = useState([]);
 
   useEffect(() => {
     fetch(`${API_URL}api/Languages/getall`)
@@ -39,9 +40,16 @@ const Homescreen = ({navigation}) => {
   }, []);
 
   useEffect(() => {
-    fetch(`${API_URL}api/Movies/gettopboxoffice?count=5`)
+    fetch(`${API_URL}api/Directors/getall`)
       .then(response => response.json())
-      .then(json => setTopMovies(json))
+      .then(json => setDirectors(json.data))
+      .catch(error => console.log(error));
+  }, []);
+
+  useEffect(() => {
+    fetch(`${API_URL}api/Movies/getrandom?number=5`)
+      .then(response => response.json())
+      .then(json => setRandomMovies(json))
       .catch(error => console.log(error))
       .then(setLoading2(false));
   }, []);
@@ -83,7 +91,7 @@ const Homescreen = ({navigation}) => {
       <View>
         <ScrollView scrollEventThrottle={16}>
           <View style={styles.lastReleasedBanner}>
-            <Text style={styles.lastReleasedText}>Son Çıkan Filmler</Text>
+            <Text style={styles.lastReleasedText}>Son Eklediğimiz Filmler</Text>
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}>
@@ -91,13 +99,19 @@ const Homescreen = ({navigation}) => {
                 <ActivityIndicator />
               ) : (
                 lastMovies.map(mv => {
-                  let genreName , languageName;
+                  let genreName, languageName, directorName;
 
                   languages.map(language => {
-                    if(language.id === mv.languageId ){
+                    if (language.id === mv.languageId) {
                       languageName = language.name;
                     }
-                  })
+                  });
+
+                  directors.map(director => {
+                    if (director.id === mv.directorId) {
+                      directorName = director.name;
+                    }
+                  });
 
                   genres.map(genre => {
                     if (genre.id === mv.genreId) {
@@ -110,6 +124,7 @@ const Homescreen = ({navigation}) => {
                       movie={mv}
                       genre={genreName}
                       language={languageName}
+                      director={directorName}
                       navigation={navigation}
                     />
                   );
@@ -121,7 +136,7 @@ const Homescreen = ({navigation}) => {
       </View>
       {/* Top Review Movies */}
       <View style={styles.mostReviewed}>
-        <Text style={styles.mostReviewedText}>En Çok Gişe Yapanlar</Text>
+        <Text style={styles.mostReviewedText}>Günün Filmleri</Text>
         <ScrollView scrollEventThrottle={16}>
           <View style={styles.mostReviewed}>
             <ScrollView
@@ -131,14 +146,21 @@ const Homescreen = ({navigation}) => {
               {isLoading2 ? (
                 <ActivityIndicator />
               ) : (
-                topMovies.map(mv => {
-                  let genreName, languageName;
+                randomMovies.map(mv => {
+                  let genreName, languageName, directorName;
 
                   languages.map(language => {
-                    if(language.id === mv.languageId ){
+                    if (language.id === mv.languageId) {
                       languageName = language.name;
                     }
-                  })
+                  });
+
+                  directors.map(director => {
+                    if (director.id === mv.directorId) {
+                      directorName = director.name;
+                    }
+                  });
+
                   genres.map(genre => {
                     if (mv.genreId === genre.id) {
                       genreName = genre.genreName;
@@ -149,6 +171,7 @@ const Homescreen = ({navigation}) => {
                       key={mv.id}
                       genre={genreName}
                       language={languageName}
+                      director={directorName}
                       movie={mv}
                       navigation={navigation}
                     />

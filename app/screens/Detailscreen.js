@@ -10,7 +10,7 @@ const API_URL = 'https://filmoneriapi.otokon.tech/';
 
 const Detailscreen = ({route, navigation}) => {
   /* get params */
-  const {genre,language, movie} = route.params;
+  const {genre, language, director, movie} = route.params;
 
   function renderContent() {
     return (
@@ -24,7 +24,7 @@ const Detailscreen = ({route, navigation}) => {
             minHeight: 800,
           }}>
           <View style={{flexDirection: 'column', paddingHorizontal: 2}}>
-            <View style={{flexDirection: 'row', marginHorizontal: 2}}>
+            <View style={{flexDirection: 'row', margin: 7}}>
               <View
                 style={{
                   flex: 1,
@@ -37,35 +37,26 @@ const Detailscreen = ({route, navigation}) => {
                   style={{
                     fontFamily: 'Antonio-SemiBold',
                     color: colors.detailScreenTitles,
-                    fontSize: 35,
+                    fontSize: 28,
                   }}>
                   {movie.name}
                 </Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: 'column',
-                  justifyContent: 'flex-end',
-                  paddingTop: 5,
-                  paddingHorizontal: 5,
-                }}>
-                <Text
+                <View
                   style={{
-                    fontFamily: 'Antonio-Light',
-                    color: colors.detailScreenTitles,
-                    fontSize: 30,
+                    flexDirection: 'row',
+                    justifyContent: 'flex-end',
+                    paddingTop: 5,
+                    paddingHorizontal: 5,
                   }}>
-                  {genre}
-                </Text>
-                <Text
-                  style={{
-                    marginLeft: 45,
-                    fontFamily: 'Antonio-Light',
-                    color: colors.detailScreenTitles,
-                    fontSize: 22,
-                  }}>
-                  {language}
-                </Text>
+                  <Text
+                    style={{
+                      fontFamily: 'Antonio-Light',
+                      color: colors.detailScreenTitles,
+                      fontSize: 23,
+                    }}>
+                    {genre} | {movie.releaseDate.substring(0, 4)} | {language}
+                  </Text>
+                </View>
               </View>
             </View>
             <Text
@@ -94,7 +85,7 @@ const Detailscreen = ({route, navigation}) => {
           color={colors.primary}
           size={26}
         />
-        <Text style={styles.headerText}>{movie.name}</Text>
+        <Text style={styles.headerText}>{director}</Text>
       </View>
     );
   }

@@ -21,11 +21,19 @@ const Moviesscreen = props => {
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
   const [text, setText] = useState('');
+  const [languages, setLanguages] = useState([]);
 
   useEffect(() => {
     fetch(`${API_URL}api/Genres/getall`)
       .then(response => response.json())
       .then(json => setGenres(json))
+      .catch(error => console.log(error));
+  }, []);
+
+  useEffect(() => {
+    fetch(`${API_URL}api/Languages/getall`)
+      .then(response => response.json())
+      .then(json => setLanguages(json))
       .catch(error => console.log(error));
   }, []);
 
@@ -89,17 +97,26 @@ const Moviesscreen = props => {
             <ActivityIndicator />
           ) : (
             movies.map(mv => {
-              let genreName;
+              let genreName, languageName;
+
+              languages.map(language => {
+                if (language.id === mv.languageId) {
+                  languageName = language.name;
+                }
+              });
+
               genres.map(genre => {
                 if (mv.genreId === genre.id) {
                   genreName = genre.genreName;
                 }
               });
+
               return (
                 <ExtendMovieCard
                   key={mv.id}
                   genre={genreName}
                   movie={mv}
+                  language={languageName}
                   navigation={props.navigation}
                 />
               );

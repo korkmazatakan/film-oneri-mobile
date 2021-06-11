@@ -1,6 +1,6 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 /* Components */
-import {useWindowDimensions, StatusBar, Alert} from 'react-native';
+import {useWindowDimensions} from 'react-native';
 /* Screens */
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
@@ -43,11 +43,9 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <StatusBar hidden />
       <Drawer.Navigator
         initialRouteName="Anasayfa"
         drawerContent={props => <DrawerContent {...props} genres={genres} />}
-        hideStatusBar
         drawerType={isLargeScreen ? 'permanent' : 'back'}
         drawerStyle={isLargeScreen ? null : {width: '80%'}}
         overlayColor="transparent">

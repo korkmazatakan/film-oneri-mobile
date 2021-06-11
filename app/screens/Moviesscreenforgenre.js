@@ -20,6 +20,7 @@ class Moviesscreenforgenre extends Component {
       text: '',
       movies: [],
       genres: [],
+      languages: [],
       isLoading: true,
       genreId: props.route.params.genreId,
     };
@@ -39,6 +40,11 @@ class Moviesscreenforgenre extends Component {
   };
 
   componentDidMount = () => {
+    fetch(`${API_URL}api/Languages/getall`)
+      .then(response => response.json())
+      .then(json => this.setState({languages: json}))
+      .catch(error => console.log(error));
+
     fetch(`${API_URL}api/Genres/getall`)
       .then(response => response.json())
       .then(json => this.setState({genres: json}))
@@ -106,7 +112,14 @@ class Moviesscreenforgenre extends Component {
               <ActivityIndicator />
             ) : (
               this.state.movies.map(mv => {
-                let genreName;
+                let genreName, languageName;
+
+                this.state.languages.map(language => {
+                  if (language.id === mv.languageId) {
+                    languageName = language.name;
+                  }
+                });
+
                 this.state.genres.map(genre => {
                   if (mv.genreId === genre.id) {
                     genreName = genre.genreName;
@@ -116,6 +129,7 @@ class Moviesscreenforgenre extends Component {
                   <ExtendMovieCard
                     key={mv.id}
                     genre={genreName}
+                    language={languageName}
                     movie={mv}
                     navigation={this.props.navigation}
                   />
