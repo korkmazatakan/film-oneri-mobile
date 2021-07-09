@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import colors from '../../../config/colors';
+import {API_URL} from '@env';
 
-const API_URL = 'https://filmoneriapi.otokon.tech/';
+//const API_URL = 'https://filmoneriapi.otokon.tech/';
 const ExtendMovieCard = ({genre, movie, language, director, navigation}) => {
   return (
     <TouchableOpacity
@@ -25,7 +26,7 @@ const ExtendMovieCard = ({genre, movie, language, director, navigation}) => {
           <Image
             style={styles.poster}
             source={{
-              uri: `${API_URL}uploads/moviecontent/posters/${movie.poster}`,
+              uri: `${API_URL}api/movies/poster/${movie.id}`,
             }}
           />
         </View>
@@ -46,7 +47,7 @@ const ExtendMovieCard = ({genre, movie, language, director, navigation}) => {
           </View>
           <View style={{flex: 1, paddingBottom: 5}}>
             <Text style={styles.gnd}>
-              {genre} | {movie.releaseDate.substring(0, 4)}
+              {genre} | {movie.release_date.substring(0, 4)}
             </Text>
           </View>
           <View style={{flex: 10}}>

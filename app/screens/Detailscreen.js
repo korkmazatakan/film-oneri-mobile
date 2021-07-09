@@ -5,8 +5,9 @@ import SafeAreaView from 'react-native-safe-area-view';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import CollapsibleToolbar from 'react-native-collapsible-toolbar';
 import colors from '../config/colors';
+import {API_URL} from '@env';
 
-const API_URL = 'https://filmoneriapi.otokon.tech/';
+//const API_URL = 'https://filmoneriapi.otokon.tech/';
 
 const Detailscreen = ({route, navigation}) => {
   /* get params */
@@ -54,7 +55,7 @@ const Detailscreen = ({route, navigation}) => {
                       color: colors.detailScreenTitles,
                       fontSize: 23,
                     }}>
-                    {genre} | {movie.releaseDate.substring(0, 4)} | {language}
+                    {genre} | {movie.release_date.substring(0, 4)} | {language}
                   </Text>
                 </View>
               </View>
@@ -98,7 +99,7 @@ const Detailscreen = ({route, navigation}) => {
       <CollapsibleToolbar
         renderContent={renderContent}
         renderNavBar={renderNavBar}
-        imageSource={`${API_URL}uploads/moviecontent/posters/${movie.poster}`}
+        imageSource={`${API_URL}api/movies/poster/${movie.id}`}
         collapsedNavBarBackgroundColor={colors.bottomBarBackground}
         toolBarHeight={300}
       />

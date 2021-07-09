@@ -8,13 +8,13 @@ import {
   View,
   ScrollView,
   ActivityIndicator,
-  StatusBar,
   Button,
 } from 'react-native';
 import colors from '../config/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {API_URL} from '@env';
 
-const API_URL = 'https://filmoneriapi.otokon.tech/';
+//const API_URL = 'https://filmoneriapi.otokon.tech/';
 
 const Moviesscreen = props => {
   const [isLoading, setLoading] = useState(true);
@@ -24,21 +24,21 @@ const Moviesscreen = props => {
   const [languages, setLanguages] = useState([]);
 
   useEffect(() => {
-    fetch(`${API_URL}api/Genres/getall`)
+    fetch(`${API_URL}api/genres/getall`)
       .then(response => response.json())
       .then(json => setGenres(json))
       .catch(error => console.log(error));
   }, []);
 
   useEffect(() => {
-    fetch(`${API_URL}api/Languages/getall`)
+    fetch(`${API_URL}api/languages/getall`)
       .then(response => response.json())
       .then(json => setLanguages(json))
       .catch(error => console.log(error));
   }, []);
 
   useEffect(() => {
-    fetch(`${API_URL}api/Movies/getall`)
+    fetch(`${API_URL}api/movies/getall`)
       .then(response => response.json())
       .then(json => setMovies(json))
       .catch(error => alert(error))
@@ -46,7 +46,7 @@ const Moviesscreen = props => {
   }, []);
 
   const onPressSearchButton = e => {
-    fetch(`${API_URL}api/Movies/search?searchQuery=${text}`)
+    fetch(`${API_URL}api/movies/search/?q=${text}`)
       .then(response => response.json())
       .then(json => setMovies(json))
       .catch(error => alert(error))
@@ -100,14 +100,14 @@ const Moviesscreen = props => {
               let genreName, languageName;
 
               languages.map(language => {
-                if (language.id === mv.languageId) {
+                if (language.id === mv.language_id) {
                   languageName = language.name;
                 }
               });
 
               genres.map(genre => {
-                if (mv.genreId === genre.id) {
-                  genreName = genre.genreName;
+                if (mv.genre_id === genre.id) {
+                  genreName = genre.name;
                 }
               });
 

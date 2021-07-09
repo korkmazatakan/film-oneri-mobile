@@ -5,7 +5,6 @@ import {
   View,
   ScrollView,
   ActivityIndicator,
-  StatusBar,
 } from 'react-native';
 import colors from '../config/colors';
 import ExtendMovieCard from './widgets/Homescreen/ExtendMovieCard';
@@ -13,8 +12,9 @@ import SmallMovieCard from './widgets/Homescreen/SmallMovieCard';
 import SafeAreaView from 'react-native-safe-area-view';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import SplashScreen from 'react-native-splash-screen';
+import {API_URL} from '@env';
 
-const API_URL = 'https://filmoneriapi.otokon.tech/';
+//const API_URL = 'https://filmoneriapi.otokon.tech/';
 
 const Homescreen = ({navigation}) => {
   const [isLoading1, setLoading1] = useState(true);
@@ -26,28 +26,28 @@ const Homescreen = ({navigation}) => {
   const [directors, setDirectors] = useState([]);
 
   useEffect(() => {
-    fetch(`${API_URL}api/Languages/getall`)
+    fetch(`${API_URL}api/languages/getall`)
       .then(response => response.json())
       .then(json => setLanguages(json))
       .catch(error => console.log(error));
   }, []);
 
   useEffect(() => {
-    fetch(`${API_URL}api/Genres/getall`)
+    fetch(`${API_URL}api/genres/getall`)
       .then(response => response.json())
       .then(json => setGenres(json))
       .catch(error => console.log(error));
   }, []);
 
   useEffect(() => {
-    fetch(`${API_URL}api/Directors/getall`)
+    fetch(`${API_URL}api/directors/getall`)
       .then(response => response.json())
-      .then(json => setDirectors(json.data))
+      .then(json => setDirectors(json))
       .catch(error => console.log(error));
   }, []);
 
   useEffect(() => {
-    fetch(`${API_URL}api/Movies/getrandom?number=5`)
+    fetch(`${API_URL}api/movies/random/?q=5`)
       .then(response => response.json())
       .then(json => setRandomMovies(json))
       .catch(error => console.log(error))
@@ -55,7 +55,7 @@ const Homescreen = ({navigation}) => {
   }, []);
 
   useEffect(() => {
-    fetch(`${API_URL}api/Movies/getlastmovies?count=5`)
+    fetch(`${API_URL}api/movies/last/?q=5`)
       .then(response => response.json())
       .then(json => setLastMovies(json))
       .catch(error => console.log(error))
@@ -102,20 +102,20 @@ const Homescreen = ({navigation}) => {
                   let genreName, languageName, directorName;
 
                   languages.map(language => {
-                    if (language.id === mv.languageId) {
+                    if (language.id === mv.language_id) {
                       languageName = language.name;
                     }
                   });
 
                   directors.map(director => {
-                    if (director.id === mv.directorId) {
+                    if (director.id === mv.director_id) {
                       directorName = director.name;
                     }
                   });
 
                   genres.map(genre => {
-                    if (genre.id === mv.genreId) {
-                      genreName = genre.genreName;
+                    if (genre.id === mv.genre_id) {
+                      genreName = genre.name;
                     }
                   });
                   return (
@@ -150,20 +150,20 @@ const Homescreen = ({navigation}) => {
                   let genreName, languageName, directorName;
 
                   languages.map(language => {
-                    if (language.id === mv.languageId) {
+                    if (language.id === mv.language_id) {
                       languageName = language.name;
                     }
                   });
 
                   directors.map(director => {
-                    if (director.id === mv.directorId) {
+                    if (director.id === mv.director_id) {
                       directorName = director.name;
                     }
                   });
 
                   genres.map(genre => {
-                    if (mv.genreId === genre.id) {
-                      genreName = genre.genreName;
+                    if (mv.genre_id === genre.id) {
+                      genreName = genre.name;
                     }
                   });
                   return (

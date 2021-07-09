@@ -7,15 +7,14 @@ import {
   Button,
   ScrollView,
   ActivityIndicator,
-  StatusBar,
 } from 'react-native';
-import {Avatar} from 'react-native-paper';
 import SafeAreaView from 'react-native-safe-area-view';
 import colors from '../config/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Directorcard from './widgets/Directorsscreen/Directorcard';
+import {API_URL} from '@env';
 
-const API_URL = 'https://filmoneriapi.otokon.tech/';
+//const API_URL = 'https://filmoneriapi.otokon.tech/';
 
 const Directorsscreen = props => {
   const [isLoading, setLoading] = useState(true);
@@ -23,15 +22,15 @@ const Directorsscreen = props => {
   const [text, setText] = useState('');
 
   useEffect(() => {
-    fetch(`${API_URL}api/Directors/getall`)
+    fetch(`${API_URL}api/directors/getall`)
       .then(response => response.json())
-      .then(json => setDirectors(json.data))
+      .then(json => setDirectors(json))
       .catch(error => alert(error))
       .then(setLoading(false));
   }, []);
 
   const onPressSearchButton = e => {
-    fetch(`${API_URL}api/Directors/search?searchQuery=${text}`)
+    fetch(`${API_URL}api/directors/search/?q=${text}`)
       .then(response => response.json())
       .then(json => setDirectors(json))
       .catch(error => alert(error))

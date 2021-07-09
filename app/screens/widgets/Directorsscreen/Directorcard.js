@@ -2,8 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import colors from '../../../config/colors';
 import {Avatar} from 'react-native-paper';
+import {API_URL} from '@env';
 
-const API_URL = 'https://filmoneriapi.otokon.tech/';
+//const API_URL = 'https://filmoneriapi.otokon.tech/';
 
 const Directorcard = ({director, navigation}) => {
   return (
@@ -23,7 +24,7 @@ const Directorcard = ({director, navigation}) => {
         <View style={{flex: 1}}>
           <Avatar.Image
             source={{
-              uri: `${API_URL}uploads/directorcontent/posters/${director.portre}`,
+              uri: `${API_URL}api/directors/poster/${director.id}`,
             }}
             size={150}
           />
@@ -43,7 +44,7 @@ const Directorcard = ({director, navigation}) => {
           </View>
           <View style={{flex: 2}}>
             <Text style={styles.gnd}>
-              {director.bornAt.substring(0, 4)} | {director.bornIn}
+              {director.born_at.substring(0, 4)} | {director.born_in}
             </Text>
           </View>
           <View style={{flex: 7}}>

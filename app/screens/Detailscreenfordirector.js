@@ -11,8 +11,9 @@ import SafeAreaView from 'react-native-safe-area-view';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import CollapsibleToolbar from 'react-native-collapsible-toolbar';
 import colors from '../config/colors';
+import {API_URL} from '@env';
 
-const API_URL = 'https://filmoneriapi.otokon.tech/';
+//const API_URL = 'https://filmoneriapi.otokon.tech/';
 
 const Detailscreenfordirector = ({route, navigation}) => {
   /* get params */
@@ -61,7 +62,7 @@ const Detailscreenfordirector = ({route, navigation}) => {
                   paddingTop: 5,
                   marginHorizontal: 5,
                 }}>
-                <Text style={styles.bornIn}>{director.bornIn}</Text>
+                <Text style={styles.bornIn}>{director.born_in}</Text>
                 <Text
                   style={{
                     marginLeft: 45,
@@ -69,7 +70,7 @@ const Detailscreenfordirector = ({route, navigation}) => {
                     color: colors.detailScreenTitles,
                     fontSize: 22,
                   }}>
-                  {director.bornAt.substring(0, 4)}
+                  {director.born_at.substring(0, 4)}
                 </Text>
               </View>
             </View>
@@ -130,7 +131,7 @@ const Detailscreenfordirector = ({route, navigation}) => {
       <CollapsibleToolbar
         renderContent={renderContent}
         renderNavBar={renderNavBar}
-        imageSource={`${API_URL}uploads/directorcontent/posters/${director.portre}`}
+        imageSource={`${API_URL}api/directors/poster/${director.id}`}
         collapsedNavBarBackgroundColor={colors.bottomBarBackground}
         toolBarHeight={300}
       />

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -6,8 +6,6 @@ import {
   Platform,
   UIManager,
   TouchableOpacity,
-  Modal,
-  Button,
   Alert,
   Linking,
 } from 'react-native';
@@ -15,6 +13,7 @@ import {Text, Avatar, Title, Caption, Drawer} from 'react-native-paper';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../../../config/colors';
+import {API_URL} from '@env';
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -22,6 +21,15 @@ if (Platform.OS === 'android') {
   }
 }
 export const DrawerContent = props => {
+  const [genres, setGenres] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API_URL}api/genres/getall`)
+      .then(res => res.json())
+      .then(json => setGenres(json))
+      .catch(err => alert(err));
+  }, []);
+
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
@@ -84,7 +92,7 @@ export const DrawerContent = props => {
               props.navigation.navigate('Directorsscreen');
             }}
           />
-          <Item genres={props.genres} navigation={props.navigation} />
+          <Item genres={genres} navigation={props.navigation} />
         </Drawer.Section>
       </DrawerContentScrollView>
       <Drawer.Section style={styles.bottomDrawerSection}>
@@ -199,7 +207,7 @@ const Item = props => {
               onPress={() =>
                 props.navigation.navigate('Moviesscreenforgenre', {
                   genreId: genre.id,
-                  genreName: genre.genreName,
+                  genreName: genre.name,
                 })
               }>
               <View
@@ -211,7 +219,7 @@ const Item = props => {
                   borderRadius: 15,
                   alignItems: 'center',
                 }}>
-                <Text>{genre.genreName}</Text>
+                <Text>{genre.name}</Text>
               </View>
             </TouchableOpacity>
           ))}

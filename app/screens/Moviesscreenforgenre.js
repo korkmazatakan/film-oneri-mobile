@@ -10,8 +10,9 @@ import {
 } from 'react-native';
 import colors from '../config/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {API_URL} from '@env';
 
-const API_URL = 'https://filmoneriapi.otokon.tech/';
+//const API_URL = 'https://filmoneriapi.otokon.tech/';
 
 class Moviesscreenforgenre extends Component {
   constructor(props) {
@@ -27,9 +28,7 @@ class Moviesscreenforgenre extends Component {
   }
 
   handleUptadeMovie = () => {
-    fetch(
-      `${API_URL}api/Movies/getbygenre?genre_id=${this.props.route.params.genreId}`,
-    )
+    fetch(`${API_URL}api/movies/genre/${this.props.route.params.genreId}`)
       .then(response => response.json())
       .then(json =>
         this.setState({
@@ -40,19 +39,17 @@ class Moviesscreenforgenre extends Component {
   };
 
   componentDidMount = () => {
-    fetch(`${API_URL}api/Languages/getall`)
+    fetch(`${API_URL}api/languages/getall`)
       .then(response => response.json())
       .then(json => this.setState({languages: json}))
       .catch(error => console.log(error));
 
-    fetch(`${API_URL}api/Genres/getall`)
+    fetch(`${API_URL}api/genres/getall`)
       .then(response => response.json())
       .then(json => this.setState({genres: json}))
       .catch(error => console.log(error));
 
-    fetch(
-      `${API_URL}api/Movies/getbygenre?genre_id=${this.props.route.params.genreId}`,
-    )
+    fetch(`${API_URL}api/movies/genre/${this.props.route.params.genreId}`)
       .then(response => response.json())
       .then(json => this.setState({movies: json}))
       .catch(error => alert(error))
@@ -74,7 +71,7 @@ class Moviesscreenforgenre extends Component {
   onPressSearchButton = async e => {
     this.setState({isLoading: true});
 
-    await fetch(`${API_URL}api/Movies/search?searchQuery=${this.state.text}`)
+    await fetch(`${API_URL}api/movies/search/?q=${this.state.text}`)
       .then(response => response.json())
       .then(json => this.setState({movies: json}))
       .catch(error => alert(error))
@@ -115,14 +112,14 @@ class Moviesscreenforgenre extends Component {
                 let genreName, languageName;
 
                 this.state.languages.map(language => {
-                  if (language.id === mv.languageId) {
+                  if (language.id === mv.language_id) {
                     languageName = language.name;
                   }
                 });
 
                 this.state.genres.map(genre => {
-                  if (mv.genreId === genre.id) {
-                    genreName = genre.genreName;
+                  if (mv.genre_id === genre.id) {
+                    genreName = genre.name;
                   }
                 });
                 return (

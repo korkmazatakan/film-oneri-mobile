@@ -1,8 +1,9 @@
 import React from 'react';
 import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 import colors from '../../../config/colors';
+import {API_URL} from '@env';
 
-const API_URL = 'https://filmoneriapi.otokon.tech/';
+//const API_URL = 'https://filmoneriapi.otokon.tech/';
 
 const SmallMovieCard = ({movie, genre, language, director, navigation}) => {
   return (
@@ -20,7 +21,7 @@ const SmallMovieCard = ({movie, genre, language, director, navigation}) => {
           <Image
             style={styles.poster}
             source={{
-              uri: `${API_URL}uploads/moviecontent/posters/${movie.poster}`,
+              uri: `${API_URL}api/movies/poster/${movie.id}`,
             }}
           />
         </View>
