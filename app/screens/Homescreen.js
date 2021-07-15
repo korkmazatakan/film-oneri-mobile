@@ -26,28 +26,28 @@ const Homescreen = ({navigation}) => {
   const [directors, setDirectors] = useState([]);
 
   useEffect(() => {
-    fetch(`${API_URL}api/languages/getall`)
+    fetch(`${API_URL}api/languages/getall?format=json`)
       .then(response => response.json())
       .then(json => setLanguages(json))
       .catch(error => console.log(error));
   }, []);
 
   useEffect(() => {
-    fetch(`${API_URL}api/genres/getall`)
+    fetch(`${API_URL}api/genres/getall?format=json`)
       .then(response => response.json())
       .then(json => setGenres(json))
       .catch(error => console.log(error));
   }, []);
 
   useEffect(() => {
-    fetch(`${API_URL}api/directors/getall`)
+    fetch(`${API_URL}api/directors/getall?format=json`)
       .then(response => response.json())
       .then(json => setDirectors(json))
       .catch(error => console.log(error));
   }, []);
 
   useEffect(() => {
-    fetch(`${API_URL}api/movies/random/?q=5`)
+    fetch(`${API_URL}api/movies/random/?format=json&q=5`)
       .then(response => response.json())
       .then(json => setRandomMovies(json))
       .catch(error => console.log(error))
@@ -55,7 +55,7 @@ const Homescreen = ({navigation}) => {
   }, []);
 
   useEffect(() => {
-    fetch(`${API_URL}api/movies/last/?q=5`)
+    fetch(`${API_URL}api/movies/last/?format=json&q=5`)
       .then(response => response.json())
       .then(json => setLastMovies(json))
       .catch(error => console.log(error))

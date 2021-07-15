@@ -24,7 +24,7 @@ export const DrawerContent = props => {
   const [genres, setGenres] = useState([]);
 
   useEffect(() => {
-    fetch(`${API_URL}api/genres/getall`)
+    fetch(`${API_URL}api/genres/getall?format=json`)
       .then(res => res.json())
       .then(json => setGenres(json))
       .catch(err => alert(err));

@@ -22,7 +22,7 @@ const Directorsscreen = props => {
   const [text, setText] = useState('');
 
   useEffect(() => {
-    fetch(`${API_URL}api/directors/getall`)
+    fetch(`${API_URL}api/directors/getall?format=json`)
       .then(response => response.json())
       .then(json => setDirectors(json))
       .catch(error => alert(error))
@@ -30,7 +30,7 @@ const Directorsscreen = props => {
   }, []);
 
   const onPressSearchButton = e => {
-    fetch(`${API_URL}api/directors/search/?q=${text}`)
+    fetch(`${API_URL}api/directors/search/?format=json&q=${text}`)
       .then(response => response.json())
       .then(json => setDirectors(json))
       .catch(error => alert(error))

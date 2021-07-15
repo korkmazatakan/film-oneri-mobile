@@ -131,7 +131,7 @@ const Detailscreenfordirector = ({route, navigation}) => {
       <CollapsibleToolbar
         renderContent={renderContent}
         renderNavBar={renderNavBar}
-        imageSource={`${API_URL}api/directors/poster/${director.id}`}
+        imageSource={`${API_URL}api/directors/poster/${director.id}?format=json`}
         collapsedNavBarBackgroundColor={colors.bottomBarBackground}
         toolBarHeight={300}
       />

@@ -24,21 +24,21 @@ const Moviesscreen = props => {
   const [languages, setLanguages] = useState([]);
 
   useEffect(() => {
-    fetch(`${API_URL}api/genres/getall`)
+    fetch(`${API_URL}api/genres/getall?format=json`)
       .then(response => response.json())
       .then(json => setGenres(json))
       .catch(error => console.log(error));
   }, []);
 
   useEffect(() => {
-    fetch(`${API_URL}api/languages/getall`)
+    fetch(`${API_URL}api/languages/getall?format=json`)
       .then(response => response.json())
       .then(json => setLanguages(json))
       .catch(error => console.log(error));
   }, []);
 
   useEffect(() => {
-    fetch(`${API_URL}api/movies/getall`)
+    fetch(`${API_URL}api/movies/getall?format=json`)
       .then(response => response.json())
       .then(json => setMovies(json))
       .catch(error => alert(error))
@@ -46,7 +46,7 @@ const Moviesscreen = props => {
   }, []);
 
   const onPressSearchButton = e => {
-    fetch(`${API_URL}api/movies/search/?q=${text}`)
+    fetch(`${API_URL}api/movies/search/?format=json&q=${text}`)
       .then(response => response.json())
       .then(json => setMovies(json))
       .catch(error => alert(error))

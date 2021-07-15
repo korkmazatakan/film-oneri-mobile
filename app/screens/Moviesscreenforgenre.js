@@ -28,7 +28,9 @@ class Moviesscreenforgenre extends Component {
   }
 
   handleUptadeMovie = () => {
-    fetch(`${API_URL}api/movies/genre/${this.props.route.params.genreId}`)
+    fetch(
+      `${API_URL}api/movies/genre/${this.props.route.params.genreId}?format=json`,
+    )
       .then(response => response.json())
       .then(json =>
         this.setState({
@@ -39,17 +41,19 @@ class Moviesscreenforgenre extends Component {
   };
 
   componentDidMount = () => {
-    fetch(`${API_URL}api/languages/getall`)
+    fetch(`${API_URL}api/languages/getall?format=json`)
       .then(response => response.json())
       .then(json => this.setState({languages: json}))
       .catch(error => console.log(error));
 
-    fetch(`${API_URL}api/genres/getall`)
+    fetch(`${API_URL}api/genres/getall?format=json`)
       .then(response => response.json())
       .then(json => this.setState({genres: json}))
       .catch(error => console.log(error));
 
-    fetch(`${API_URL}api/movies/genre/${this.props.route.params.genreId}`)
+    fetch(
+      `${API_URL}api/movies/genre/${this.props.route.params.genreId}?format=json`,
+    )
       .then(response => response.json())
       .then(json => this.setState({movies: json}))
       .catch(error => alert(error))
@@ -71,7 +75,7 @@ class Moviesscreenforgenre extends Component {
   onPressSearchButton = async e => {
     this.setState({isLoading: true});
 
-    await fetch(`${API_URL}api/movies/search/?q=${this.state.text}`)
+    await fetch(`${API_URL}api/movies/search/?q=${this.state.text}?format=json`)
       .then(response => response.json())
       .then(json => this.setState({movies: json}))
       .catch(error => alert(error))

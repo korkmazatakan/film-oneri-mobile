@@ -99,7 +99,7 @@ const Detailscreen = ({route, navigation}) => {
       <CollapsibleToolbar
         renderContent={renderContent}
         renderNavBar={renderNavBar}
-        imageSource={`${API_URL}api/movies/poster/${movie.id}`}
+        imageSource={`${API_URL}api/movies/poster/${movie.id}?format=json`}
         collapsedNavBarBackgroundColor={colors.bottomBarBackground}
         toolBarHeight={300}
       />

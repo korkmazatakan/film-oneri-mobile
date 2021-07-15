@@ -27,7 +27,9 @@ class Moviesscreenfordirector extends Component {
   }
 
   handleUptadeMovie = () => {
-    fetch(`${API_URL}api/movies/director/${this.props.route.params.directorId}`)
+    fetch(
+      `${API_URL}api/movies/director/${this.props.route.params.directorId}?format=json`,
+    )
       .then(response => response.json())
       .then(json =>
         this.setState({
@@ -38,12 +40,14 @@ class Moviesscreenfordirector extends Component {
   };
 
   componentDidMount = () => {
-    fetch(`${API_URL}api/genres/getall`)
+    fetch(`${API_URL}api/genres/getall?format=json`)
       .then(response => response.json())
       .then(json => this.setState({genres: json}))
       .catch(error => console.log(error));
 
-    fetch(`${API_URL}api/movies/director/${this.props.route.params.directorId}`)
+    fetch(
+      `${API_URL}api/movies/director/${this.props.route.params.directorId}?format=json`,
+    )
       .then(response => response.json())
       .then(json => this.setState({movies: json}))
       .catch(error => alert(error))
@@ -65,7 +69,7 @@ class Moviesscreenfordirector extends Component {
   onPressSearchButton = async e => {
     this.setState({isLoading: true});
 
-    await fetch(`${API_URL}api/movies/search/?q=${this.state.text}`)
+    await fetch(`${API_URL}api/movies/search/?format=json&q=${this.state.text}`)
       .then(response => response.json())
       .then(json => this.setState({movies: json}))
       .catch(error => alert(error))
